@@ -7,11 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="Steden\Steden.json" />
+      <Folder Include="Model\Metingen\Data\" />
+      <Folder Include="Model\Weerberichts\Data\" />
     </ItemGroup>
 
 </Project>

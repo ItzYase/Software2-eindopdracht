@@ -1,6 +1,7 @@
 using System.Text.Json;
+using WeerEventsApi.Model.Steden;
 
-namespace WeerEventsApi.Steden.Repositories;
+namespace WeerEventsApi.Model.Steden.Repositories;
 
 public class StadRepository : IStadRepository
 {

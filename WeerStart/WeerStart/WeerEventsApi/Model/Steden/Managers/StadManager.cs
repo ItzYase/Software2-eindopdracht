@@ -1,6 +1,7 @@
-using WeerEventsApi.Steden.Repositories;
+using WeerEventsApi.Model.Steden;
+using WeerEventsApi.Model.Steden.Repositories;
 
-namespace WeerEventsApi.Steden.Managers;
+namespace WeerEventsApi.Model.Steden.Managers;
 
 public class StadManager(IStadRepository repository) : IStadManager
 {

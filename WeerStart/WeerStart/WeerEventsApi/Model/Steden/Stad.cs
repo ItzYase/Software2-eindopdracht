@@ -1,4 +1,4 @@
-namespace WeerEventsApi.Steden;
+namespace WeerEventsApi.Model.Steden;
 
 public class Stad
 {
