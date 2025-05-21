@@ -1,14 +1,13 @@
 using WeerEventsApi.Facade.Controllers;
 using WeerEventsApi.Logging;
 using WeerEventsApi.Logging.Factories;
-using WeerEventsApi.Model.Metingen.Managers;
-using WeerEventsApi.Model.Metingen.Repositories;
 using WeerEventsApi.Model.Steden.Managers;
 using WeerEventsApi.Model.Steden.Repositories;
 using WeerEventsApi.Model.Weerberichts.Managers;
 using WeerEventsApi.Model.Weerberichts.Repositories;
 using WeerEventsApi.Model.Weerstations.Managers;
 using WeerEventsApi.Model.Weerstations.Repositories;
+using WeerEventsApi.Model.Weerberichts.Proxy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IMetingLogger>(MetingLoggerFactory.Create(true,true));
 builder.Services.AddSingleton<IStadRepository, StadRepository>();
 builder.Services.AddSingleton<IStadManager, StadManager>();
-builder.Services.AddSingleton<IMetingRepository, MetingRepository>();
-builder.Services.AddSingleton<IMetingManager, MetingManager>();
+builder.Services.AddSingleton<IWeerberichtProxy, WeerberichtProxy>();
 builder.Services.AddSingleton<IWeerstationRepository, WeerstationRepository>();
 builder.Services.AddSingleton<IWeerstationManager, WeerstationManager>();
 builder.Services.AddSingleton<IWeerberichtRepository, WeerberichtRepository>();
@@ -37,6 +35,5 @@ app.MapGet("/metingen", (IDomeinController dc) => dc.GeefMetingen());
 app.MapGet("/commands/meting-command", (IDomeinController dc) => dc.DoeMetingen());
 
 app.MapGet("/weerbericht", (IDomeinController dc) => dc.GeefWeerbericht());
-
 
 app.Run();

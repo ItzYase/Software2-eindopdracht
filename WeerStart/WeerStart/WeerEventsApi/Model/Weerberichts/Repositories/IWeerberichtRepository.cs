@@ -1,7 +1,9 @@
-﻿namespace WeerEventsApi.Model.Weerberichts.Repositories
+﻿using WeerEventsApi.Model.Metingen;
+
+namespace WeerEventsApi.Model.Weerberichts.Repositories
 {
     public interface IWeerberichtRepository
     {
-        IEnumerable<Weerbericht> GeefWeerberichten();
+        Weerbericht GeefWeerbericht(IEnumerable<Meting> metings);
     }
 }

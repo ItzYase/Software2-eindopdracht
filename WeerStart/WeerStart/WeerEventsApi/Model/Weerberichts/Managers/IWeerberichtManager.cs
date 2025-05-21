@@ -1,7 +1,9 @@
-﻿namespace WeerEventsApi.Model.Weerberichts.Managers
+﻿using WeerEventsApi.Model.Metingen;
+
+namespace WeerEventsApi.Model.Weerberichts.Managers
 {
     public interface IWeerberichtManager
     {
-        IEnumerable<Weerbericht> GeefWeerberichten();
+       Weerbericht GeefWeerbericht(IEnumerable<Meting> metings);
     }
 }

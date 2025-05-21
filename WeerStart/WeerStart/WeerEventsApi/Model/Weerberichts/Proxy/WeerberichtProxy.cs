@@ -1,23 +1,18 @@
-﻿namespace WeerEventsApi.Model.Weerberichts.Proxy
+﻿using WeerEventsApi.Model.Metingen;
+using WeerEventsApi.Model.Weerberichts;
+using WeerEventsApi.Model.Weerberichts.Proxy;
+using WeerEventsApi.Model.Weerberichts.Services;
+public class WeerberichtProxy(IService service) : IWeerberichtProxy
 {
-    public class WeerberichtProxy : IWeerberichtProxy
+    private Weerbericht _cachedWeerbericht;
+    private DateTime _laatsteGenereerTijd;
+
+    public Weerbericht GeefWeerbericht(IEnumerable<Meting> metingen)
     {
-        private Weerbericht weerbericht { get; set; }
-        private DateTime laatsteCacheTIjd;
-        public Weerbericht GeefWeerbericht()
+        if (_cachedWeerbericht == null || (DateTime.Now - _laatsteGenereerTijd).TotalMinutes > 1)
         {
-            if (weerbericht != null || (DateTime.Now - laatsteCacheTIjd).TotalMinutes < 1)
-            {
-                return weerbericht;
-            }
-            else
-            {
-                return weerbericht = new Weerbericht
-                {
-                    DateTime = DateTime.Now,
-                    Inhoud = 20.0
-                };
-            }
+            service.GeefWeerbericht(metingen);
         }
+        return _cachedWeerbericht;
     }
 }

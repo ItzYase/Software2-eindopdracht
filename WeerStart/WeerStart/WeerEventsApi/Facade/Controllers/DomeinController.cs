@@ -2,7 +2,6 @@ using WeerEventsApi.Facade.Dto;
 using WeerEventsApi.Model.Steden.Managers;
 using WeerEventsApi.Model.Weerberichts.Managers;
 using WeerEventsApi.Model.Weerstations.Managers;
-using WeerEventsApi.Model.Metingen.Managers;
 
 namespace WeerEventsApi.Facade.Controllers;
 
@@ -10,14 +9,12 @@ public class DomeinController : IDomeinController
 {
     private readonly IStadManager _stadManager;
     private readonly IWeerberichtManager _weerberichtManager;
-    private readonly IMetingManager _metingManager;
     private readonly IWeerstationManager _weerstationManager;
 
-    public DomeinController(IStadManager stadManager,IWeerberichtManager weerbericht,IMetingManager metingManager,IWeerstationManager weerstationManager)
+    public DomeinController(IStadManager stadManager, IWeerberichtManager weerbericht, IWeerstationManager weerstationManager)
     {
         _stadManager = stadManager;
         _weerberichtManager = weerbericht;
-        _metingManager = metingManager;
         _weerstationManager = weerstationManager;
     }
 
@@ -42,7 +39,7 @@ public class DomeinController : IDomeinController
 
     public IEnumerable<MetingDto> GeefMetingen()
     {
-        return _metingManager.GeefMetingen().Select(m => new MetingDto
+        return _weerstationManager.GeefMetingen().Select(m => new MetingDto
         {
             Waarde = m.Waarde,
             Tijdstip = m.Tijdstip,
@@ -52,15 +49,16 @@ public class DomeinController : IDomeinController
 
     public void DoeMetingen()
     {
-        _metingManager.DoeMeting(_weerstationManager.GeefWeerstations());
+        _weerstationManager.DoeMeting();
     }
 
     public WeerBerichtDto GeefWeerbericht()
     {
+        var weerbericht = _weerberichtManager.GeefWeerbericht(_weerstationManager.GeefMetingen());
         return new WeerBerichtDto
         {
-            DateTime = _weerberichtManager.GeefWeerbericht().DateTime,
-            Inhoud = _weerberichtManager.GeefWeerbericht().Inhoud
+            DateTime = weerbericht.DateTime,
+            Inhoud = weerbericht.Inhoud
         };
     }
 }

@@ -15,5 +15,10 @@ namespace WeerEventsApi.Model.Weerstations.Repositories
         {
            _weerstations.Where(w => w != weerstation).First().metingen.Add(meting);
         }
+
+        public void doeMeting(Weerstation weerstation)
+        {
+            weerstation.doeMeting();
+        }
     }
 }

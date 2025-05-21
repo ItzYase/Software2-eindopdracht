@@ -9,8 +9,8 @@ namespace WeerEventsApi.Model.Weerstations
     {
         public Stad stad { get; set; }
         public List<Meting> metingen { get; set; }
-        public Meting doeMeting();
-        public List<Meting> geefMetingen();
+        public void doeMeting();
+        public IEnumerable<Meting> geefMetingen();
 
     }
 }
