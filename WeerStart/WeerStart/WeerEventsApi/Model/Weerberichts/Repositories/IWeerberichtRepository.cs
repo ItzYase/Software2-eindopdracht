@@ -2,5 +2,6 @@
 {
     public interface IWeerberichtRepository
     {
+        IEnumerable<Weerbericht> GeefWeerberichten();
     }
 }

@@ -8,7 +8,7 @@ namespace WeerEventsApi.Model.Metingen.Managers
 
         public void DoeMetingen()
         {
-            return
+            return;
         }
 
         public IEnumerable<Meting> GeefMetingen()

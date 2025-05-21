@@ -5,9 +5,12 @@ using System.Collections.Generic;
 
 namespace WeerEventsApi.Model.Weerstations
 {
-    public abstract class Weerstation
+    public interface Weerstation
     {
         public Stad stad { get; set; }
-        public List<Meting> meting { get; set; }
+        public List<Meting> metingen { get; set; }
+        public Meting doeMeting();
+        public List<Meting> geefMetingen();
+
     }
 }

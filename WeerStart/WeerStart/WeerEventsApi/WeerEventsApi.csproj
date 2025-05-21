@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
@@ -11,8 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Model\Metingen\Data\" />
-      <Folder Include="Model\Weerberichts\Data\" />
+      <Folder Include="Logging\Logs\" />
     </ItemGroup>
 
 </Project>

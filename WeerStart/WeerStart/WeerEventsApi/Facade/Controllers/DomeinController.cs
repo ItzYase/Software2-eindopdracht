@@ -35,25 +35,32 @@ public class DomeinController : IDomeinController
     {
         return _weerstationManager.GeefWeerstations().Select(w => new WeerStationDto
         {
-            
+            stad = w.stad,
+            meting = w.metingen
         });
     }
 
     public IEnumerable<MetingDto> GeefMetingen()
     {
-        //TODO
-        throw new NotImplementedException();
+        return _metingManager.GeefMetingen().Select(m => new MetingDto
+        {
+            Waarde = m.Waarde,
+            Tijdstip = m.Tijdstip,
+            Eenheid = m.Eenheid.ToString()
+        });
     }
 
     public void DoeMetingen()
     {
-        //TODO
-        throw new NotImplementedException();
+        _metingManager.DoeMeting(_weerstationManager.GeefWeerstations());
     }
 
     public WeerBerichtDto GeefWeerbericht()
     {
-        //TODO
-        throw new NotImplementedException();
+        return new WeerBerichtDto
+        {
+            DateTime = _weerberichtManager.GeefWeerbericht().DateTime,
+            Inhoud = _weerberichtManager.GeefWeerbericht().Inhoud
+        };
     }
 }
