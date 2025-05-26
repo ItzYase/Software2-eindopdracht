@@ -1,6 +1,5 @@
 using WeerEventsApi.Facade.Controllers;
 using WeerEventsApi.Logging;
-using WeerEventsApi.Logging.Factories;
 using WeerEventsApi.Model.Steden.Managers;
 using WeerEventsApi.Model.Steden.Repositories;
 using WeerEventsApi.Model.Weerberichts.Managers;
@@ -8,6 +7,7 @@ using WeerEventsApi.Model.Weerberichts.Repositories;
 using WeerEventsApi.Model.Weerstations.Managers;
 using WeerEventsApi.Model.Weerstations.Repositories;
 using WeerEventsApi.Model.Weerberichts.Proxy;
+using WeerEventsApi.Model.Weerberichts.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IMetingLogger>(MetingLoggerFactory.Create(true,true));
 builder.Services.AddSingleton<IStadRepository, StadRepository>();
 builder.Services.AddSingleton<IStadManager, StadManager>();
+builder.Services.AddSingleton<IService, Service>();
 builder.Services.AddSingleton<IWeerberichtProxy, WeerberichtProxy>();
 builder.Services.AddSingleton<IWeerstationRepository, WeerstationRepository>();
 builder.Services.AddSingleton<IWeerstationManager, WeerstationManager>();

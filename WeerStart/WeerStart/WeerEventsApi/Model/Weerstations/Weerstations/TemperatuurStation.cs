@@ -1,4 +1,5 @@
-﻿using WeerEventsApi.Model.Metingen;
+﻿using WeerEventsApi.Logging.Observer;
+using WeerEventsApi.Model.Metingen;
 using WeerEventsApi.Model.Steden;
 using WeerEventsApi.Model.Weerstations.Enumiraties;
 
@@ -11,7 +12,7 @@ namespace WeerEventsApi.Model.Weerstations
             this.stad = stad;
             this.metingen = metingen;
         }
-
+        private readonly List<IObserver> _observers = new();
         public Stad stad { get; set; }
         public List<Meting> metingen { get; set; }
 
@@ -21,6 +22,7 @@ namespace WeerEventsApi.Model.Weerstations
             double temperatuur = random.Next(-10, 35) + random.NextDouble();
             Meting meting = new(DateTime.Now, temperatuur, Eenheid.Celsius);
             metingen.Add(meting);
+            NotifyObservers(meting);
         }
 
         public List<Meting> geefMetingen()
@@ -31,6 +33,14 @@ namespace WeerEventsApi.Model.Weerstations
         IEnumerable<Meting> Weerstation.geefMetingen()
         {
             return metingen;
+        }
+
+        public void NotifyObservers(Meting meting)
+        {
+            foreach (var observer in _observers)
+            {
+                observer.Update(meting);
+            }
         }
     }
 }

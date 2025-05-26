@@ -2,6 +2,7 @@
 using WeerEventsApi.Model.Weerberichts;
 using WeerEventsApi.Model.Weerberichts.Proxy;
 using WeerEventsApi.Model.Weerberichts.Services;
+
 public class WeerberichtProxy(IService service) : IWeerberichtProxy
 {
     private Weerbericht _cachedWeerbericht;
@@ -11,7 +12,8 @@ public class WeerberichtProxy(IService service) : IWeerberichtProxy
     {
         if (_cachedWeerbericht == null || (DateTime.Now - _laatsteGenereerTijd).TotalMinutes > 1)
         {
-            service.GeefWeerbericht(metingen);
+            _cachedWeerbericht = service.GeefWeerbericht(metingen);
+            _laatsteGenereerTijd = DateTime.Now;
         }
         return _cachedWeerbericht;
     }

@@ -4,7 +4,6 @@ namespace WeerEventsApi.Model.Weerberichts.Services
 {
     public class Service : IService
     {
-        private Weerbericht weerbericht;
         public Weerbericht GeefWeerbericht(IEnumerable<Meting> metingen)
         {
             Thread.Sleep(5000);

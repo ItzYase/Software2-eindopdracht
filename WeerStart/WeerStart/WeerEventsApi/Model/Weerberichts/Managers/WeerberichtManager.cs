@@ -7,7 +7,6 @@ namespace WeerEventsApi.Model.Weerberichts.Managers
     {
         public Weerbericht GeefWeerbericht(IEnumerable<Meting> metings)
         {
-            Thread.Sleep(5000);
             return repository.GeefWeerbericht(metings);
         }
     }
